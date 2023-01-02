@@ -1,0 +1,243 @@
+"Timestamp"	"4 digit employee id"	"UG courses [1st option]"	"UG courses [2nd option]"	"UG courses [3rd option]"
+"2022/12/23 8:33:45 PM GMT+5:30"	"1234"	"MA2020: Differential Equations"	"MA2010: Complex Variables"	"MA2040: Probability
+"2022/12/23 8:34:01 PM GMT+5:30"	"3455"	"MA2010: Complex Variables"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"
+"2022/12/23 8:34:18 PM GMT+5:30"	"8234"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"
+"2022/12/23 8:34:40 PM GMT+5:30"	"8763"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA2020: Differential Equations"
+"2022/12/23 8:34:56 PM GMT+5:30"	"9834"	"MA2020: Differential Equations"	"MA2040: Probability	 Statistics and Stochastic Processes"
+"2022/12/23 8:35:25 PM GMT+5:30"	"8734"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA1101: Functions of Several Variables"
+"4 digit employee id"	"UG courses [1st option]"	"UG courses [2nd option]"	"UG courses [3rd option]"
+"UG courses [4th option]"
+"1234"	"MA2020: Differential Equations"	"MA2010: Complex Variables"	"MA2040: Probability
+ Statistics and Stochastic Processes"
+"3455"	"MA2010: Complex Variables"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"
+"MA1101: Functions of Several Variables"
+"8234"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"
+"MA1101: Functions of Several Variables"
+"8763"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA2020: Differential Equations"
+"MA1101: Functions of Several Variables"
+"9834"	"MA2020: Differential Equations"	"MA2040: Probability	 Statistics and Stochastic Processes"
+"MA2010: Complex Variables"
+"8734"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA1101: Functions of Several Variables"
+"MA2020: Differential Equations"
+"4 digit employee id"	"UG courses [1st option]"	"UG courses [2nd option]"	"UG courses [3rd option]"
+"UG courses [4th option]"
+"1234"	"MA2020: Differential Equations"	"MA2010: Complex Variables"	"MA2040: Probability
+ Statistics and Stochastic Processes"
+"3455"	"MA2010: Complex Variables"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"
+"MA1101: Functions of Several Variables"
+"8234"	"MA2020: Differential Equations"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"
+"MA1101: Functions of Several Variables"
+"8763"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA2020: Differential Equations"
+"MA1101: Functions of Several Variables"
+"9834"	"MA2020: Differential Equations"	"MA2040: Probability	 Statistics and Stochastic Processes"
+"MA2010: Complex Variables"
+"8734"	"MA2031: Linear Algebra"	"MA2010: Complex Variables"	"MA1101: Functions of Several Variables"
+"MA2020: Differential Equations"
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8923	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8634	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables
+8683	MA1101: Functions of Several Variables	MA2010: Complex Variables	MA2031: Linear Algebra
+MA2020: Differential Equations
+8880	MA2040: Probability Statistics & Stochastic Processes	MA2031: Linear Algebra	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8923	MA2020: Differential Equations	MA2040: Probability Statistics & Stochastic Processes	MA2010: Complex Variables
+MA1101: Functions of Several Variables
+8634	MA2040: Probability Statistics & Stochastic Processes	MA2020: Differential Equations	MA2031: Linear Algebra
+MA1101: Functions of Several Variables

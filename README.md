@@ -9,7 +9,10 @@ Workload allocation
 "facultyRequirement.csv" should be created by the Workload incharge indicating course number and faculty requirement for each course
 </li>
 <li>
-Perl script "Workload.pl" will output "coursePreference.csv" and "finalAllotment.csv". To run the script, key in <mark>perl workload.pl</mark>
+Perl script "Workload.pl" will output "coursePreference.csv" and "finalAllotment.csv".
+</li>
+<li>
+To run the script, key in <mark>perl workload.pl</mark>
 </li>
 <li>
 "coursePreference.csv" will list faculty willing to teach each course based on priority.

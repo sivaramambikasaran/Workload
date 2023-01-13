@@ -67,21 +67,13 @@ sub course_preference_list {
 	# print $_,"\t" foreach (@{$preference{$third_option}{3}});
 
 	
-	my @empID4;
-	if ($preference{$fourth_option}{4}){
-		@empID4 = @{$preference{$fourth_option}{4}};
-	}
-	push (@empID4,$emp_id);
-	$preference{$fourth_option}{4} = \@empID4;
-	# print $_,"\t" foreach (@{$preference{$fourth_option}{4}});
-	
-	# open(COURSE, ">>output/ratings.txt");
-	# print COURSE $emp_id, "\t";
-	# print COURSE $first_option, "\t";
-	# print COURSE $second_option, "\t";
-	# print COURSE $third_option, "\n";
-	# print COURSE $fourth_option, "\n";
-	# close(COURSE);
+	# my @empID4;
+	# if ($preference{$fourth_option}{4}){
+	# 	@empID4 = @{$preference{$fourth_option}{4}};
+	# }
+	# push (@empID4,$emp_id);
+	# $preference{$fourth_option}{4} = \@empID4;
+
 }
 
 sub populateCourseRequirement {
@@ -103,7 +95,7 @@ sub allotCourses {
 	}
 	print OUT "\n";
 
-	my @preferenceNumber = (1..4);
+	my @preferenceNumber = (1..3);
 	for my $i (@preferenceNumber) {
 		foreach (keys %instructorRequirement) {
 			
@@ -170,7 +162,7 @@ sub allotCourses {
 
 sub printInfo {
 	open(PREF,">coursePreference.csv");
-	my @preferenceNumber = (1..4);
+	my @preferenceNumber = (1..3);
 	foreach (keys %preference) {
 		print PREF "\n",$_;
 		for my $i (@preferenceNumber){

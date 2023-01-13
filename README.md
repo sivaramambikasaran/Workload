@@ -12,7 +12,7 @@ Workload allocation
 Perl script "Workload.pl" will output "coursePreference.csv" and "finalAllotment.csv".
 </li>
 <li>
-To run the script, key in <mark>perl workload.pl</mark>
+To run the script, key in "<mark>perl workload.pl</mark>"
 </li>
 <li>
 "coursePreference.csv" will list faculty willing to teach each course based on priority.

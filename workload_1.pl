@@ -27,7 +27,7 @@ sub min {
 
 sub course_preference_list {
 	my ($priority) = @_;
-	my @ipriority = split(",",$priority);
+	my @ipriority = split("\",\"",$priority);
 	
 	my $emp_id 			= ($ipriority[1]);
 	my $first_option 	= substr($ipriority[2], 0, 6);
@@ -96,17 +96,10 @@ sub populateCourseRequirement {
 }
 
 sub allotCourses {
-	open (OUT,">finalAllotment.csv");
 	
-	foreach (keys %instructorRequirement) {
-		print OUT "\n", $_," ",$instructorRequirement{$_}," ";
-	}
-	print OUT "\n";
-
 	my @preferenceNumber = (1..4);
 	for my $i (@preferenceNumber) {
 		foreach (keys %instructorRequirement) {
-			
 			my $reqdNumber = $instructorRequirement{$_};
 			if ($reqdNumber == 0){next;}
 			
@@ -130,16 +123,7 @@ sub allotCourses {
 				$numberFaculty = @updatedOptedFaculty;
 				@reqdFacultyList = @updatedOptedFaculty[0 .. min($reqdNumber,$numberFaculty)-1];
 				# print $_,"\n" foreach @reqdFacultyList;
-				my @currList;
-				if ($courseFacultyMap{$_}){@currList = @{$courseFacultyMap{$_}};}
-				push (@currList,$_) foreach (@reqdFacultyList);
-				$courseFacultyMap{$_} = \@currList;
-				
-				# Update reqdNumber		
-				$reqdNumber = $reqdNumber - min($reqdNumber,$numberFaculty);
-				$instructorRequirement{$_} = $reqdNumber;
-				# print "Updated requirement:",$_,"\t",$instructorRequirement{$_},"\n"; 
-				
+				$courseFacultyMap{$_} = \@reqdFacultyList;
 			}
 			else {$numberFaculty = 0;}
 		
@@ -154,18 +138,19 @@ sub allotCourses {
 # 			}
 # 			print "\n";
 		
+			# Update reqdNumber
+			$reqdNumber = $reqdNumber - min($reqdNumber,$numberFaculty);
+			$instructorRequirement{$_} = $reqdNumber;
 		}
 	}
 	
 	# Check information populated
 	foreach (keys %instructorRequirement) {
 		my @assignedFaculty = @{$courseFacultyMap{$_}};
-		print OUT $_,"\t";
-		print OUT $_,"\t" foreach @assignedFaculty;
-		print OUT "\n";
-		print "Updated requirement:",$_,"\t",$instructorRequirement{$_},"\n"; 
+		print $_,"\t",@assignedFaculty,"\n";
+		print "Updated requirement:",$instructorRequirement{$_},"\n"; 
 	}			
-	close (OUT);
+	
 }
 
 sub printInfo {

@@ -1,34 +1,34 @@
-Timestamp,4 digit employee id,UG courses [1st option],UG courses [2nd option],UG courses [3rd option]
-1/12/2023 17:48:31,3987,MA1101: Functions of Several Variables,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:48:49,3001,MA2031: Linear Algebra,MA1101: Functions of Several Variables,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:49:05,3002,MA2031: Linear Algebra,MA2010: Complex Variables,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:49:17,3003,MA2020: Differential Equations,MA2010: Complex Variables,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:49:27,3005,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes,MA2010: Complex Variables
-1/12/2023 17:49:44,3006,MA2040: Probability Statistics & Stochastic Processes,MA2031: Linear Algebra,MA2010: Complex Variables
-1/12/2023 17:49:58,3007,MA2020: Differential Equations,MA2010: Complex Variables,MA2031: Linear Algebra
-1/12/2023 17:50:28,4321,MA1101: Functions of Several Variables,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:51:15,8763,MA2031: Linear Algebra,MA2010: Complex Variables,MA2020: Differential Equations
-1/12/2023 17:51:37,9845,MA1101: Functions of Several Variables,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:51:48,4634,MA2031: Linear Algebra,MA2010: Complex Variables,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:52:00,9087,MA2010: Complex Variables,MA2020: Differential Equations,MA2031: Linear Algebra
-1/12/2023 17:52:11,7634,MA2010: Complex Variables,MA2031: Linear Algebra,MA2020: Differential Equations
-1/12/2023 17:52:22,3456,MA2020: Differential Equations,MA2010: Complex Variables,MA2031: Linear Algebra
-1/12/2023 17:52:34,9865,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
-1/12/2023 17:53:06,1435,MA2020: Differential Equations,MA2031: Linear Algebra,MA2010: Complex Variables
-1/12/2023 17:53:18,7834,MA1101: Functions of Several Variables,MA2031: Linear Algebra,MA2010: Complex Variables
-1/12/2023 17:53:30,345,MA1101: Functions of Several Variables,MA2010: Complex Variables,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:54:10,4587,MA2010: Complex Variables,MA2031: Linear Algebra,MA2020: Differential Equations
-1/12/2023 17:55:39,9001,MA2010: Complex Variables,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:55:49,9003,MA2020: Differential Equations,MA2031: Linear Algebra,MA2010: Complex Variables
-1/12/2023 17:55:58,9007,MA1101: Functions of Several Variables,MA2031: Linear Algebra,MA2010: Complex Variables
-1/12/2023 17:56:10,9102,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
-1/12/2023 17:56:24,9105,MA2031: Linear Algebra,MA2010: Complex Variables,MA1101: Functions of Several Variables
-1/12/2023 17:56:34,9203,MA2040: Probability Statistics & Stochastic Processes,MA1101: Functions of Several Variables,MA2010: Complex Variables
-1/12/2023 17:56:47,7777,MA2010: Complex Variables,MA2020: Differential Equations,MA1101: Functions of Several Variables
-1/12/2023 17:57:58,7677,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
-1/12/2023 17:58:08,7577,MA2010: Complex Variables,MA2031: Linear Algebra,MA2040: Probability Statistics & Stochastic Processes
-1/12/2023 17:58:20,6503,MA1101: Functions of Several Variables,MA2010: Complex Variables,MA2031: Linear Algebra
-1/12/2023 17:58:48,3871,MA2040: Probability Statistics & Stochastic Processes,MA2020: Differential Equations,MA2031: Linear Algebra
-1/13/2023 9:22:32,2223,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
-1/13/2023 9:22:43,3334,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
-1/13/2023 9:22:55,9999,MA2031: Linear Algebra,MA2020: Differential Equations,MA2010: Complex Variables
+Time stamp,Faculty Name,Mail id,UG courses [1st option],UG courses [2nd option],UG courses [3rd option]
+1/12/2023 17:48:31,Dr. Anoop T V,anoop,MA1101,MA2031,MA2040
+1/12/2023 17:48:49,Dr. Anuj Jakhar,anujjakhar,MA2031,MA1101,MA2040
+1/12/2023 17:49:05,Aprameyan P,aprameyan,MA2031,MA2010,MA2040
+1/12/2023 17:49:17,Arijit Dey,arijit,MA2020,MA2010,MA2040
+1/12/2023 17:49:27,Dr. Arindama Singh,asingh,MA2031,MA2040,MA2010
+1/12/2023 17:49:44,Dr. Arunkumar Ganesan,garunkumar,MA2040,MA2031,MA2010
+1/12/2023 17:49:58,Dr. Balaji Ramamurthy,balaji5,MA2020,MA2010,MA2031
+1/12/2023 17:50:28,Dr. Barun Sarkar,barun,MA1101,MA2031,MA2040
+1/12/2023 17:51:15,Dr. Chand A.K.B,chand,MA2031,MA2010,MA2020
+1/12/2023 17:51:37,Dr. Chidella Srinivasa Rao,chsrao,MA1101,MA2031,MA2040
+1/12/2023 17:51:48,Dr. Dipramit Majumdar,dipramit,MA2031,MA2010,MA2040
+1/12/2023 17:52:00,Dr. Jayanthan A V,jayanav,MA2010,MA2020,MA2031
+1/12/2023 17:52:11,Dr. Kalpana Mahalingam,kmahalingam,MA2010,MA2031,MA2020
+1/12/2023 17:52:22,Kunal Krishna Mukherjee,kunal,MA2020,MA2010,MA2031
+1/12/2023 17:52:34,Dr. Narayanan N,naru,MA2031,MA2020,MA2010
+1/12/2023 17:53:06,Dr. Neelesh S Upadhye,neelesh,MA2020,MA2031,MA2010
+1/12/2023 17:53:18,Dr. Ponnusamy Saminathan,samy,MA1101,MA2031,MA2010
+1/12/2023 17:53:30,Dr. Priyanka Shukla,priyanka,MA1101,MA2010,MA2040
+1/12/2023 17:54:10,Dr. Radha R,radharam,MA2010,MA2031,MA2020
+1/12/2023 17:55:39,Dr. Rama R,ramar,MA2010,MA2031,MA2040
+1/12/2023 17:55:49,Dr. Ramesh Kasilingam,rameshk,MA2020,MA2031,MA2010
+1/12/2023 17:55:58,Dr. S R Manam,manam,MA1101,MA2031,MA2010
+1/12/2023 17:56:10,Dr. Santanu Sarkar,santanu,MA2031,MA2020,MA2010
+1/12/2023 17:56:24,Dr. Sanyasiraju V S S Yedida,sryedida,MA2031,MA2010,MA1101
+1/12/2023 17:56:34,Sarang Sane,sarang,MA2040,MA1101,MA2010
+1/12/2023 17:56:47,Dr. Sathish Kumar A,sathishkumar,MA2010,MA2020,MA1101
+1/12/2023 17:57:58,Dr. Satyajit Roy,sjroy,MA2031,MA2020,MA2010
+1/12/2023 17:58:08,Dr. Shaiju A J,ajshaiju,MA2010,MA2031,MA2040
+1/12/2023 17:58:20,Dr. Shruti Dubey,sdubey,MA1101,MA2010,MA2031
+1/12/2023 17:58:48,Dr. Sivakumar K C,kcskumar,MA2040,MA2020,MA2031
+1/13/2023 9:22:32,Dr. Sivaram Ambikasaran,sivaambi,MA2031,MA2020,MA2010
+1/13/2023 9:22:43,Dr. Soumen Sarkar,soumen,MA2031,MA2020,MA2010
+1/13/2023 9:22:55,Dr. Sounaka Mishra,sounak,MA2031,MA2020,MA2010

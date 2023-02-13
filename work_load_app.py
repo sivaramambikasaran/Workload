@@ -13,15 +13,18 @@ file2 = st.file_uploader("Upload Faculty preference sheet")
 slider_val = 10
 checkbox_val = 100
 is_ug_done = False
+
+wl.set_faculty()
+wl.set_courses()
+wl.update_requirements(file1) #'facultyRequirement_ug.csv'
+wl.extract_preferences(file2)
+
+df_pref = wl.show_course_fac_preference_table()
+
 with st.form("Process data"):
    # Every form must have a submit button.
    submitted = st.form_submit_button("Process")
    if submitted:
-      wl.set_faculty()
-      wl.set_courses()
-      wl.update_requirements(file1) #'facultyRequirement_ug.csv'
-      wl.extract_preferences(file2)
-      df_pref = wl.show_course_fac_preference_table()
       st.dataframe(df_pref)
 
 st.subheader('UG Course allotment')
@@ -44,7 +47,7 @@ with st.form("Update UG allotment"):
       if is_ug_done:
          pass
       else:
-         st.write("Perfom UG allotment ... ")
+         st.write("Perfom UG allotment")
       
 
 st.subheader('PG Course allotment')
@@ -93,4 +96,3 @@ st.download_button(label="Download .pdf",
                    data=PDFbyte,
                    file_name="WorkLoad.pdf",
                    mime='application/octet-stream')
-

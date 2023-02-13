@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import workLoad as wl
 
+wl.set_faculty()
+wl.set_courses()
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
 st.subheader('Data dependencies')
@@ -14,16 +16,13 @@ slider_val = 10
 checkbox_val = 100
 is_ug_done = False
 
-wl.set_faculty()
-wl.set_courses()
-wl.update_requirements(file1) #'facultyRequirement_ug.csv'
-wl.extract_preferences(file2)
-df_pref = wl.show_course_fac_preference_table()
-
 with st.form("Process data"):
    # Every form must have a submit button.
    submitted = st.form_submit_button("Process")
    if submitted:
+      wl.update_requirements(file1)  # 'facultyRequirement_ug.csv'
+      wl.extract_preferences(file2)
+      df_pref = wl.show_course_fac_preference_table()
       st.dataframe(df_pref)
 
 st.subheader('UG Course allotment')
@@ -71,12 +70,12 @@ with st.form("Update PG allotment"):
 
 st.subheader('Provisional allotment')
 st.write("Following formats are available for download")
-df = pd.read_csv('Teaching_Preference.csv')
+
 
 
 @st.experimental_memo
-def convert_df(df):
-   return df.to_csv(index=False).encode('utf-8')
+def convert_df(df_):
+   return df_.to_csv(index=False).encode('utf-8')
 
 csv = convert_df(df_allot)
 

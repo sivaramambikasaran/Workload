@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import workLoad as wl
 
+wl.clear_variables()
 wl.set_faculty()
 wl.set_courses()
 st.title('Work Load Manager')

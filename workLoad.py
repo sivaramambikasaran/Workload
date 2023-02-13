@@ -404,3 +404,13 @@ def show_course_fac_preference_table():
     df = pd.DataFrame(output_sheet)
     return df
 
+def clear_variables():
+    faculty_list_master_data = {}
+    course_list_master_data = {}
+# After provisional UG allotment the app shows the remaining faculty (checkpoint for In charge)
+    faculty_on_roll = []
+
+# Database of courses offered in the department
+# The course code, name offered in a cycle and distinction as UG and PG course
+    current_course_ug = []
+    current_course_pg = []

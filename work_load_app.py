@@ -36,8 +36,8 @@ with st.form("UG allotment"):
       is_ug_done = True
 
 with st.form("Update UG allotment"):
-   st.write("If modifications needed please upload appropriate files !!")
-   file3 = st.file_uploader("Upload Course Faculty modifications..")
+   st.write("If modifications needed please upload appropriate files")
+   file3 = st.file_uploader("Upload Course Faculty modifications")
    # Every form must have a submit button.
    submitted = st.form_submit_button("Proceed")
    if submitted:
@@ -56,15 +56,15 @@ with st.form("PG allotment"):
        st.write("slider", slider_val, "checkbox", checkbox_val)
        is_ug_done = True
 with st.form("Update PG allotment"):
-   st.write("If modifications needed please upload appropriate files !!")
-   file3 = st.file_uploader("Upload Course Faculty modifications..")
+   st.write("If modifications needed please upload appropriate files")
+   file3 = st.file_uploader("Upload Course Faculty modifications")
    # Every form must have a submit button.
    submitted = st.form_submit_button("Proceed")
    if submitted:
       if is_ug_done:
          pass
       else:
-         st.write("Perfom PG allotment ... ")
+         st.write("Perfom PG allotment")
 
 
 st.subheader('Provisional allotment')

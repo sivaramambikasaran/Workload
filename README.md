@@ -21,3 +21,5 @@ To run the script, key in "<mark>perl workload.pl</mark>"
 "finalAllotment.csv" will list the final allotment. The workload incharge has to fill-in the remaining allotments after this gets completed.
 </li>
 </ul>
+
+<a href="https://sivaramambikasaran-workload-work-load-app-pcvdur.streamlit.app">Link</a>

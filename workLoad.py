@@ -179,7 +179,7 @@ class course:
 
 
 def set_faculty():
-    flmd = pd.read_csv('facultyList.csv')
+    flmd = pd.read_csv('./data/facultyList.csv')
     tmp_fac_name = flmd['Faculty Name']
     tmp_fac_mail = flmd['Mail id']
     for i in range(len(tmp_fac_mail)):
@@ -191,7 +191,7 @@ def set_faculty():
 
 
 def set_courses():
-    clmd = pd.read_csv('courseList.csv')
+    clmd = pd.read_csv('./data/courseList.csv')
     clmd = clmd.drop_duplicates(keep='first')
     clmd['Course Name'] = clmd['Course Name'].apply(str.lower)
     clmd['Course Name'] = clmd['Course Name'].apply(str.capitalize)
@@ -244,8 +244,8 @@ def update_course_history():
     # Keep the vectors ug_count_ and pg_count_ equivalent to faculty_on_roll
     # For each course add course_history{} dict
     # iterate through each sheet and add to each course who taught if key is there then add value if not add key and 1
-    workload_history_file = ['work_load_ODD_21.csv',
-                             'work_load_EVEN_21.csv', 'work_load_ODD_22.csv', 'work_load_EVEN_22.csv']
+    workload_history_file = ['./data/work_load_ODD_21.csv',
+                             './data/work_load_EVEN_21.csv', './data/work_load_ODD_22.csv', './data/work_load_EVEN_22.csv']
     for i_ in range(0, len(workload_history_file)):
         workload_hist = pd.read_csv(workload_history_file[i_])
         # faculty_list_master_data[].hist_ug

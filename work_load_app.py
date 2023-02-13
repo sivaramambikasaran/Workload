@@ -18,7 +18,6 @@ wl.set_faculty()
 wl.set_courses()
 wl.update_requirements(file1) #'facultyRequirement_ug.csv'
 wl.extract_preferences(file2)
-
 df_pref = wl.show_course_fac_preference_table()
 
 with st.form("Process data"):

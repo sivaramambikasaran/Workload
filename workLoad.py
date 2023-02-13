@@ -216,21 +216,21 @@ def set_courses():
 
 
 def update_requirements(dat_file):
+
     faculty_requirement = pd.read_csv(dat_file)
     course_list_ = list(faculty_requirement['Course'])
-    print(course_list_)
     # TODO : update current_course_ug/pg based on requirement
     course_req_ = list(faculty_requirement[' Requirement'])
-    print(course_req_)
-    for i in range(len(course_list_)):
-        print(course_list_[i])
-        course_list_master_data[course_list_[
-            i]].add_requirement(course_req_[i])
-        if course_list_master_data[course_list_[i]].isUG_course():
-            current_course_ug.append(course_list_master_data[course_list_[i]])
-        else:
-            current_course_pg.append(course_list_master_data[course_list_[i]])
-        print(course_list_master_data[course_list_[0]].course_name)
+    if len(current_course_pg) == 0:
+        for i in range(len(course_list_)):
+            print(course_list_[i])
+            course_list_master_data[course_list_[
+                i]].add_requirement(course_req_[i])
+            if course_list_master_data[course_list_[i]].isUG_course():
+                current_course_ug.append(course_list_master_data[course_list_[i]])
+            else:
+                current_course_pg.append(course_list_master_data[course_list_[i]])
+        #print(course_list_master_data[course_list_[0]].course_name)
        # course_list_master_data[str(course_list_[i])].print_course()
 # Compute workload history using different csv
 # use a loop to compute number of courses in ug and pg
@@ -277,22 +277,23 @@ def extract_preferences(dat_file):
     # Safe to sort the file
     course_pref_data = course_pref_data.sort_values(by=['Time stamp'])
     # Get the faculty on roll
-    faculty_on_roll = list(course_pref_data['Mail id'])
-    prep_t = 1
-    for froll in faculty_on_roll:
-        faculty_list_master_data[froll].priority_key = prep_t
-        prep_t += 1
+    if len(faculty_on_roll) == 0:
+        faculty_on_roll = list(course_pref_data['Mail id'])
+        prep_t = 1
+        for froll in faculty_on_roll:
+            faculty_list_master_data[froll].priority_key = prep_t
+            prep_t += 1
 
-    # iterating the columns
-    cpd = list(course_pref_data.columns)
-    print(cpd)
-    assert NUM_PREFERENCES + \
-        2 == len(cpd), "Preference Mismatch between file and definition"
-    for i in range(3, len(cpd)):
-        pref_c_to_f = list(course_pref_data[cpd[i]])
-        for k in range(0, len(faculty_on_roll)):
-            course_list_master_data[pref_c_to_f[k]
-                                    ].preference[i-3].append(faculty_on_roll[k])
+        # iterating the columns
+        cpd = list(course_pref_data.columns)
+        print(cpd)
+        assert NUM_PREFERENCES + \
+            2 == len(cpd), "Preference Mismatch between file and definition"
+        for i in range(3, len(cpd)):
+            pref_c_to_f = list(course_pref_data[cpd[i]])
+            for k in range(0, len(faculty_on_roll)):
+                course_list_master_data[pref_c_to_f[k]
+                                        ].preference[i-3].append(faculty_on_roll[k])
 
 
 

@@ -3,95 +3,84 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import workLoad as wl
+from pathlib import Path
 
-wl.clear_variables()
-wl.set_faculty()
-wl.set_courses()
+
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
 st.subheader('Data dependencies')
 st.write("Please upload the following files in .csv format")
 file1 = st.file_uploader("Upload Course Faculty requirement")
 file2 = st.file_uploader("Upload Faculty preference sheet")
-slider_val = 10
-checkbox_val = 100
-is_ug_done = False
+
+odd2023 = wl.allotment()
+df_pref = pd.DataFrame()
+df_allot = pd.DataFrame()
+odd2023.set_faculty()
+odd2023.set_courses()
+
 
 with st.form("Process data"):
    # Every form must have a submit button.
    submitted = st.form_submit_button("Process")
    if submitted:
-      wl.update_requirements(file1)  # 'facultyRequirement_ug.csv'
-      wl.extract_preferences(file2)
-      df_pref = wl.show_course_fac_preference_table()
-      st.dataframe(df_pref)
+       odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
+       odd2023.extract_preferences(file2)
+       pre_out = odd2023.show_course_fac_preference_table()
+       st.write(len(pre_out))
+       df_pref = pd.DataFrame(pre_out)
+       df_pref.replace(str(np.nan), " ")
 
-st.subheader('UG Course allotment')
-with st.form("UG allotment"):
-   st.write("Proceed with the UG course allotment")
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Proceed")
-   if submitted:
-      wl.compute_provisional_allotment_ug()
-      df_allot = wl.generate_allotment()
-      st.dataframe(df_allot)
-      is_ug_done = True
-
-with st.form("Update UG allotment"):
-   st.write("If modifications needed please upload appropriate files")
-   file3 = st.file_uploader("Upload Course Faculty modifications")
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Proceed")
-   if submitted:
-      if is_ug_done:
-         pass
-      else:
-         st.write("Perfom UG allotment")
-      
-
-st.subheader('PG Course allotment')
-with st.form("PG allotment"):
-   st.write("Proceed with the PG course allotment")
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Proceed")
-   if submitted:
-       st.write("slider", slider_val, "checkbox", checkbox_val)
-       is_ug_done = True
-with st.form("Update PG allotment"):
-   st.write("If modifications needed please upload appropriate files")
-   file3 = st.file_uploader("Upload Course Faculty modifications")
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Proceed")
-   if submitted:
-      if is_ug_done:
-         pass
-      else:
-         st.write("Perfom PG allotment")
+st.write(df_pref)
 
 
-st.subheader('Provisional allotment')
-st.write("Following formats are available for download")
-
-
-
-@st.experimental_memo
 def convert_df(df_):
    return df_.to_csv(index=False).encode('utf-8')
 
-csv = convert_df(df_allot)
 
+csv_pref = convert_df(df_pref)
+
+st.write("To download the above table in csv format")
+st.write("click below to download in csv format")
 st.download_button(
-    "Download .csv",
-    csv,
-    "WorkLoad.csv",
+    ".csv",
+    csv_pref,
+    "Course_Faculty_Preference.csv",
     "text/csv",
     key='download-csv'
 )
+del df_pref
 
-with open("sample.pdf", "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
+st.subheader('UG Course allotment')
+with st.form("UG allotment"):
+   st.write("Proceed with the UG course allotment based on above preference")
+   # Every form must have a submit button.
+   submitted = st.form_submit_button("Proceed")
+   if submitted:
+       odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
+       odd2023.extract_preferences(file2)
+       odd2023.compute_provisional_allotment_ug()
+       df_allot = odd2023.generate_allotment()
+       st.dataframe(df_allot)
+       odd2023.get_tab_course_fac()
+       is_ug_done = True
 
-st.download_button(label="Download .pdf",
-                   data=PDFbyte,
-                   file_name="WorkLoad.pdf",
-                   mime='application/octet-stream')
+st.subheader("Download allotment")
+my_file1 = Path("./output_file_1.pdf")
+if my_file1.is_file():
+    with open("output_file_1.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(label="Course - Faculty pdf",
+                       data=PDFbyte,
+                       file_name="WorkLoad.pdf",
+                       mime='application/octet-stream')
+my_file2 = Path("./output_file_2.pdf")
+if my_file2.is_file():
+    with open("output_file_2.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(label="Faculty - Course pdf",
+                       data=PDFbyte,
+                       file_name="WorkLoad.pdf",
+                       mime='application/octet-stream')

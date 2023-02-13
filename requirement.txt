@@ -1,3 +1,6 @@
 streamlit
 pandas
 workLoad
+Path
+numpy
+pdfkit

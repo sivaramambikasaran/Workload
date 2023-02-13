@@ -22,7 +22,6 @@ class faculty:
     """Class for professor data, this holds the information needed for calculating the workload.
     Also this stores the provisional allotment
     """
-
     def __init__(self, data):
         # Information of a professor
         self.name = data[0]
@@ -31,10 +30,12 @@ class faculty:
         self.pg_course_count_left = COURSE_PER_CYCLE
         # This will hold the courses alloted  (filled either through provisional allotment)
         self.current_allotment = []
+        self.ug_sem = 1
+        self.pg_sem = 1
         self.course_count = 0
         self.priority_key = 100
 
-    def add_preferences(self, data):
+    def add_preferences(self,data):
         self.course_preferences = data  # this is just the current cycle
         pass
 
@@ -49,15 +50,15 @@ class faculty:
         # This will have courses of 4 semesters initially, post allotment this increases on provisional allotment
 
     def can_accommodate_ug(self):
-        if self.course_count < COURSE_PER_CYCLE and self.ug_course_count_left > 0:
+        if self.course_count < COURSE_PER_CYCLE and self.ug_course_count_left > 0 and self.ug_sem == 1:
             return True
         return False
 
     def can_accommodate_pg(self):
-        if self.course_count == COURSE_PER_CYCLE:
+        if self.course_count == COURSE_PER_CYCLE and self.pg_sem == 1:
             return False
         return True
-
+    
     def hist_ug(self):
         #       self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
         #       self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
@@ -65,16 +66,21 @@ class faculty:
         self.ug_course_count_left -= 1
         self.pg_course_count_left -= 1
         self.course_count += 1
-
+    
     def hist_pg(self):
-        #       self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
-        #       self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
-        #       self.course_count = pg_count + ug_count
+            #       self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
+            #       self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
+            #       self.course_count = pg_count + ug_count
         self.pg_course_count_left -= 1
         self.course_count += 1
 
-    def allot_course(self, course_):
+    def allot_course_ug(self, course_):
         self.current_allotment.append(course_)
+        self.ug_sem = 0
+
+    def allot_course_pg(self, course_):
+        self.current_allotment.append(course_)
+        self.pg_sem = 0
 
     def print_faculty_details(self):
         print(self.name)
@@ -265,9 +271,9 @@ def update_course_history():
                                                                                 cfl: tmp})
 
 
-def extract_preferences():
+def extract_preferences(dat_file):
     # Course preference form
-    course_pref_data = pd.read_csv('Teaching_Preference.csv')
+    course_pref_data = pd.read_csv(dat_file)
     # Safe to sort the file
     course_pref_data = course_pref_data.sort_values(by=['Time stamp'])
     # Get the faculty on roll
@@ -297,7 +303,7 @@ def compute_provisional_allotment_ug():
     # provides the course taught history from other files
     # update_course_history()
     # Each course has preferences setup -->
-    extract_preferences()
+    # extract_preferences()
     # Allotment algorithm
     # Allotment does in Number of preferences
     for i in range(0, NUM_PREFERENCES):
@@ -319,6 +325,7 @@ def compute_provisional_allotment_ug():
                 for ctp in course_tmp_pref:
                     if current_course_ug[j].get_requirement() > 0:
                         current_course_ug[j].assign_faculty(ctp.smail)
+                        ctp.allot_course_ug(current_course_ug[j])
 
 
 # Step 2 : Intervention of in charge (Manual checkup) -- Need to upload modifications
@@ -380,3 +387,20 @@ def generate_allotment():
     df = pd.DataFrame(output_sheet)
     # File name needs to taken as input
     df.to_csv('work_load_ODD_2023.csv')
+    return df
+
+
+def show_course_fac_preference_table():
+    # As of now, the preference for each course printed in the order of filling the preference form
+    output_sheet = []
+    for course_ in current_course_ug:
+        for i in range(0, NUM_PREFERENCES-1):
+            tmp = []
+            tmp.append(course_.course_code)
+            tmp.append("Option " + str(i+1))
+            for x in course_.preference[i]:
+                tmp.append(x)
+            output_sheet.append(tmp)
+    df = pd.DataFrame(output_sheet)
+    return df
+

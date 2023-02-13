@@ -7,9 +7,9 @@ import workLoad as wl
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
 st.subheader('Data dependencies')
-st.write("Please upload the following files in .csv format.")
-file1 = st.file_uploader("Upload Course Faculty requirement..")
-file2 = st.file_uploader("Upload Faculty preference sheet..")
+st.write("Please upload the following files in .csv format")
+file1 = st.file_uploader("Upload Course Faculty requirement")
+file2 = st.file_uploader("Upload Faculty preference sheet")
 slider_val = 10
 checkbox_val = 100
 is_ug_done = False

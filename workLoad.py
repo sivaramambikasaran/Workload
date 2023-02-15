@@ -144,7 +144,7 @@ class course:
 # Adding more ties can be done but the final TIE rule must return a single value
     def tie_rule_3(self, fac1, fac2):
         # Priority key stores an unique rank based on the time the data was submitted (This breaks all ties)
-        if fac1.priority_key > fac2.priority_key:
+        if fac1.priority_key < fac2.priority_key:
             return fac2, fac1
         return fac1, fac2
     # The below tie is used along with bubble sort to sort and allot

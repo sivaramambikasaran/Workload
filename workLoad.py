@@ -4,7 +4,7 @@ import pdfkit
 UG_COURSE_LIMIT = 3
 # 4 semesters  constitute a cycle
 COURSE_PER_CYCLE = 6
-NUM_PREFERENCES = 4
+NUM_PREFERENCES = 3
 NUM_TIE_RULES = 3
 YEAR_ = 2023
 SEM_ = 'ODD'
@@ -144,10 +144,9 @@ class course:
 # Adding more ties can be done but the final TIE rule must return a single value
     def tie_rule_3(self, fac1, fac2):
         # Priority key stores an unique rank based on the time the data was submitted (This breaks all ties)
-        if fac1.priority_key < fac2.priority_key:
-            return fac1, fac2
-        else:
+        if fac1.priority_key > fac2.priority_key:
             return fac2, fac1
+        return fac1, fac2
     # The below tie is used along with bubble sort to sort and allot
     # Add ties as and when needed
 
@@ -156,8 +155,7 @@ class course:
             return self.tie_rule_1(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
-        if self.tie_rule_3(fac1, fac2) != None:
-            return self.tie_rule_3(fac1, fac2)
+        return self.tie_rule_3(fac1, fac2)
         # if fac1.tie_rule_X(fac2) != None:
         #  return fac1.tie_rule_x(fac2)   ====> can be added at the bottom to add more Ties (for an xth tie)
 
@@ -165,8 +163,7 @@ class course:
     def tie_settle_pg(self, fac1, fac2):
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
-        if self.tie_rule_3(fac1, fac2) != None:
-            return self.tie_rule_3(fac1, fac2)
+        return self.tie_rule_3(fac1, fac2)
         # if fac1.tie_rule_X(fac2) != None:
         #  return fac1.tie_rule_x(fac2)   ====> can be added at the bottom to add more Ties (for an xth tie)
 
@@ -279,7 +276,7 @@ class allotment:
         print(f"Faculty count ", len(self.current_course_ug))
         output_sheet = []
         for course_ in self.current_course_ug:
-            for i in range(0, NUM_PREFERENCES-1):
+            for i in range(0, NUM_PREFERENCES):
                 tmp = []
                 tmp.append(course_.course_code)
                 tmp.append("Option " + str(i+1))
@@ -318,39 +315,42 @@ class allotment:
         # extract_preferences()
         # Allotment algorithm
         # Allotment does in Number of preferences
-        for i in range(0, NUM_PREFERENCES):
-            # Does for each current courses
+        for i in range(0, NUM_PREFERENCES-1):
+        # Does for each current courses
             for ccug in self.current_course_ug:
                 # order the faculty
                 if ccug.get_requirement() > 0:
                     course_tmp_pref = []
                     for x in ccug.preference[i]:
                         if (self.faculty_list_master_data[x].can_accommodate_ug()):
-                            course_tmp_pref.append(
-                                self.faculty_list_master_data[x])
+                            course_tmp_pref.append(self.faculty_list_master_data[x])
                     n = len(course_tmp_pref)
                     print(n)
+                    print(i, [[x.smail, x.priority_key] for x in course_tmp_pref])
                     for i_ in range(n-1):
                         for j_ in range(0, n-i_-1):
                             course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccug.tie_settle_ug(
                                 course_tmp_pref[j_], course_tmp_pref[j_+1])
                     # Once the faculty is sorted out they are assigned to the course
+                    print(i, [x.smail for x in course_tmp_pref])
                     for ctp in course_tmp_pref:
-                        if ccug.get_requirement() > 0:
+                        if ccug.get_requirement() > 0 and ctp.ug_sem==1:
                             ccug.assign_faculty(ctp.smail)
                             ctp.allot_course_ug(ccug)
-
-    def extract_preferences(self, dat_file):
-        # Course preference form
+                            print(ccug.course_name,ctp.smail)
+    
+    def extract_preferences(self,dat_file):
+            # Course preference form
         self.faculty_on_roll = set()
         course_pref_data = pd.read_csv(dat_file)
         # Safe to sort the file
         course_pref_data = course_pref_data.sort_values(by=['Time stamp'])
         # Get the faculty on roll
-        faculty_on_roll = set(list(course_pref_data['Mail id']))
+        tmp_faculty_on_roll = list(course_pref_data['Mail id'])
         tmp_fac_roll = list(course_pref_data['Mail id'])
+        self.faculty_on_roll = set(tmp_faculty_on_roll)
         prep_t = 1
-        for froll in faculty_on_roll:
+        for froll in tmp_faculty_on_roll:
             self.faculty_list_master_data[froll].priority_key = prep_t
             prep_t += 1
 
@@ -363,7 +363,7 @@ class allotment:
             pref_c_to_f = list(course_pref_data[cpd[i]])
             for k in range(0, len(tmp_fac_roll)):
                 self.course_list_master_data[pref_c_to_f[k]
-                                             ].preference[i-3].append(tmp_fac_roll[k])
+                                        ].preference[i-3].append(tmp_fac_roll[k])
 
     def update_requirements(self, dat_file):
         faculty_requirement = pd.read_csv(dat_file)

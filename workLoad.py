@@ -4,7 +4,7 @@ import pdfkit
 UG_COURSE_LIMIT = 3
 # 4 semesters  constitute a cycle
 COURSE_PER_CYCLE = 6
-NUM_PREFERENCES = 3
+NUM_PREFERENCES = 4
 NUM_TIE_RULES = 3
 YEAR_ = 2023
 SEM_ = 'ODD'
@@ -99,9 +99,10 @@ class course:
     def add_requirement(self, x):
         self.course_faculty_required = x
 
-    def assign_faculty(self, faculty):
+    def assign_faculty(self, faculty_):
         self.course_faculty_required -= 1
-        self.faculty_list.append(faculty)
+        self.faculty_list.append(faculty_)
+        print(faculty_)
 
     def set_as_pg(self):
         self.is_ug_course = False
@@ -120,6 +121,8 @@ class course:
         return self.course_faculty_required
 
     def tie_rule_1(self, fac1, fac2):
+        if fac1.ug_course_count_left < fac2.ug_course_count_left:
+            return None
         # Number of UG courses left in cycle (NOTICE the reverse order)
         if fac1.ug_course_count_left < fac2.ug_course_count_left:
             return fac2, fac1
@@ -135,6 +138,8 @@ class course:
         if self.course_history.get(fac2.smail) != None:
             b = self.course_history[fac2.smail]
         # Number of times the same course is taught in previous cycle (NOTICE the reverse order)
+        if a == b:
+            return None
         if a < b:
             return fac1, fac2
         if a > b:
@@ -145,12 +150,14 @@ class course:
     def tie_rule_3(self, fac1, fac2):
         # Priority key stores an unique rank based on the time the data was submitted (This breaks all ties)
         if fac1.priority_key < fac2.priority_key:
+            return fac1, fac2
+        else:
             return fac2, fac1
-        return fac1, fac2
     # The below tie is used along with bubble sort to sort and allot
     # Add ties as and when needed
 
     def tie_settle_ug(self, fac1, fac2):
+
         if self.tie_rule_1(fac1, fac2) != None:
             return self.tie_rule_1(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
@@ -163,100 +170,10 @@ class course:
     def tie_settle_pg(self, fac1, fac2):
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
-        return self.tie_rule_3(fac1, fac2)
+        if self.tie_rule_3(fac1, fac2) != None:
+            return self.tie_rule_3(fac1, fac2)
         # if fac1.tie_rule_X(fac2) != None:
         #  return fac1.tie_rule_x(fac2)   ====> can be added at the bottom to add more Ties (for an xth tie)
-
-
-# Course list is stored as a database
-
-
-# Compute faculty requirement csv
-
-# Routine to have the courses as dictionary or keep it in the list
-# Create Course objects
-
-        # print(course_list_master_data[course_list_[0]].course_name)
-       # course_list_master_data[str(course_list_[i])].print_course()
-# Compute workload history using different csv
-# use a loop to compute number of courses in ug and pg
-
-
-# def update_course_history():
-#     # workload_hist = pd.read_csv('work_load_ODD_2022.csv')
-#     # After each year, the courses are allotted, a function is written to store that in a
-#     # csv file named as : work_load_ODD/EVEN_YYYY.csv
-#     # As of now, just a single year data is considered
-#     # Keep the vectors ug_count_ and pg_count_ equivalent to faculty_on_roll
-#     # For each course add course_history{} dict
-#     # iterate through each sheet and add to each course who taught if key is there then add value if not add key and 1
-#     workload_history_file = ['./data/work_load_ODD_21.csv',
-#                              './data/work_load_EVEN_21.csv', './data/work_load_ODD_22.csv', './data/work_load_EVEN_22.csv']
-#     for i_ in range(0, len(workload_history_file)):
-#         workload_hist = pd.read_csv(workload_history_file[i_])
-#         # faculty_list_master_data[].hist_ug
-#         for i in range(0, len(workload_hist.index)):
-#             course_fac_list = list(workload_hist.iloc[i])
-#             course_code_ = course_fac_list[0]
-#             course_fac_list.remove(course_code_)
-#             course_fac_list = [x for x in course_fac_list if x == x]
-#             for cfl in course_fac_list:
-#                 # this is to update faculty object
-#                 if course_list_master_data[course_code_].isUG_course():
-#                     faculty_list_master_data[cfl].hist_ug()
-#                 else:
-#                     faculty_list_master_data[cfl].hist_pg()
-#                 # this is done to update the course objects
-#                 if course_list_master_data[course_code_].course_history.get(cfl) == None:
-#                     tmp = 1
-#                     course_list_master_data[course_code_].course_history.update({
-#                                                                                 cfl: tmp})
-#                 else:
-#                     tmp = course_list_master_data[course_code_].course_history[cfl] + 1
-#                     course_list_master_data[course_code_].course_history.update({
-#                                                                                 cfl: tmp})
-
-
-# STEP 1 : Produce a provisional allotment for UG courses
-
-
-# Step 2 : Intervention of in charge (Manual checkup) -- Need to upload modifications
-# Additional check on additions or deletions
-def finalize_allotment_ug():
-    pass
-
-# Step 3 : Provisional allotment for PG courses
-# Allotment algorithm
-
-
-# def compute_provisional_allotment_pg():
-#     # Allotment does in Number of preferences
-#     for i in range(0, NUM_PREFERENCES):
-#        # Does for each current courses
-#         for j in range(0, len(current_course_pg)):
-#             # order the faculty
-#             if current_course_pg[j].get_requirement() > 0:
-#                 course_tmp_pref = [
-#                     x for x in current_course_pg[j].preference[i] if x.can_accommodate_pg()]
-#                 n = len(course_tmp_pref)
-#                 for i_ in range(n):
-#                     for j_ in range(0, n-i-1):
-#                         course_tmp_pref[j_], course_tmp_pref[j_ + 1] = course_tmp_pref[j_].tie_settle_pg(
-#                             course_tmp_pref[j_], course_tmp_pref[j_+1], current_course_pg[j])
-#                 # Once the faculty is sorted out they are assigned to the course
-#                 for ctp in course_tmp_pref:
-#                     if current_course_pg[j].get_requirement() > 0:
-#                         current_course_pg[j].assign_faculty(ctp)
-
-
-# Step 4 : Intervention of in charge (Manual Checkup)
-# Additional check on additions or deletions
-
-def finalize_allotment_pg():
-    pass
-
-# Step 5 : Course work load generated as csv  -- Need to upload modifications
-# TODO : provide in PDF file
 
 
 class allotment:
@@ -276,7 +193,7 @@ class allotment:
         print(f"Faculty count ", len(self.current_course_ug))
         output_sheet = []
         for course_ in self.current_course_ug:
-            for i in range(0, NUM_PREFERENCES):
+            for i in range(0, NUM_PREFERENCES-1):
                 tmp = []
                 tmp.append(course_.course_code)
                 tmp.append("Option " + str(i+1))
@@ -305,7 +222,7 @@ class allotment:
             output_sheet.append(tmp)
         df = pd.DataFrame(output_sheet)
         # File name needs to taken as input
-        #df.to_csv('work_load_ODD_2023.csv')
+        df.to_csv('work_load_ODD_2023.csv')
         return df
 
     def compute_provisional_allotment_ug(self):
@@ -316,17 +233,19 @@ class allotment:
         # Allotment algorithm
         # Allotment does in Number of preferences
         for i in range(0, NUM_PREFERENCES-1):
-        # Does for each current courses
+            # Does for each current courses
             for ccug in self.current_course_ug:
                 # order the faculty
                 if ccug.get_requirement() > 0:
                     course_tmp_pref = []
                     for x in ccug.preference[i]:
                         if (self.faculty_list_master_data[x].can_accommodate_ug()):
-                            course_tmp_pref.append(self.faculty_list_master_data[x])
+                            course_tmp_pref.append(
+                                self.faculty_list_master_data[x])
                     n = len(course_tmp_pref)
                     print(n)
-                    print(i, [[x.smail, x.priority_key] for x in course_tmp_pref])
+                    print(i, [[x.smail, x.priority_key]
+                          for x in course_tmp_pref])
                     for i_ in range(n-1):
                         for j_ in range(0, n-i_-1):
                             course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccug.tie_settle_ug(
@@ -334,13 +253,13 @@ class allotment:
                     # Once the faculty is sorted out they are assigned to the course
                     print(i, [x.smail for x in course_tmp_pref])
                     for ctp in course_tmp_pref:
-                        if ccug.get_requirement() > 0 and ctp.ug_sem==1:
+                        if ccug.get_requirement() > 0 and ctp.ug_sem == 1:
                             ccug.assign_faculty(ctp.smail)
                             ctp.allot_course_ug(ccug)
-                            print(ccug.course_name,ctp.smail)
-    
-    def extract_preferences(self,dat_file):
-            # Course preference form
+                            print(ccug.course_name, ctp.smail)
+
+    def extract_preferences(self, dat_file):
+        # Course preference form
         self.faculty_on_roll = set()
         course_pref_data = pd.read_csv(dat_file)
         # Safe to sort the file
@@ -363,7 +282,7 @@ class allotment:
             pref_c_to_f = list(course_pref_data[cpd[i]])
             for k in range(0, len(tmp_fac_roll)):
                 self.course_list_master_data[pref_c_to_f[k]
-                                        ].preference[i-3].append(tmp_fac_roll[k])
+                                             ].preference[i-3].append(tmp_fac_roll[k])
 
     def update_requirements(self, dat_file):
         faculty_requirement = pd.read_csv(dat_file)
@@ -446,7 +365,7 @@ class allotment:
         html_string = '''
         <html>
         <head><title>Course Allotment Aug-Nov 2023</title></head>
-        <link rel="stylesheet" type="text/css" href="df_style.css"/>
+        <link rel="stylesheet" type="text/css" href="df_style2.css"/>
         <body>
             {table}
         </body>

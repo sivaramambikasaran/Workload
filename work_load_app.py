@@ -65,6 +65,21 @@ with st.form("UG allotment"):
        odd2023.get_tab_course_fac()
        is_ug_done = True
 
+st.subheader('PG Course allotment')
+with st.form("PG allotment"):
+   st.write("Proceed with the PG course allotment")
+   # Every form must have a submit button.
+   submitted = st.form_submit_button("Proceed")
+   if submitted:
+       odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
+       odd2023.extract_preferences(file2)
+       odd2023.compute_provisional_allotment_ug()
+       odd2023.compute_provisional_allotment_pg()
+       df_allot = odd2023.generate_allotment()
+       st.dataframe(df_allot)
+       odd2023.get_tab_course_fac()
+       is_ug_done = True
+
 st.subheader("Download allotment")
 my_file1 = Path("./output_file_1.pdf")
 if my_file1.is_file():
@@ -84,3 +99,4 @@ if my_file2.is_file():
                        data=PDFbyte,
                        file_name="WorkLoad.pdf",
                        mime='application/octet-stream')
+

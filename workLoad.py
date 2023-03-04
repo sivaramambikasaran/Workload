@@ -224,6 +224,25 @@ class allotment:
         # File name needs to taken as input
         df.to_csv('work_load_ODD_2023.csv')
         return df
+# self.current_course_pg holds current pg courses
+    def compute_provisional_allotment_pg(self):
+        for i in range(0, NUM_PREFERENCES-1):
+            for ccpg in self.current_course_pg:
+                if ccpg.get_requirement() > 0:
+                    course_tmp_pref = []
+                for x in ccpg.preference[i]:
+                    if (self.faculty_list_master_data[x].can_accommodate_pg()):
+                        course_tmp_pref.append(
+                            self.faculty_list_master_data[x])
+                for i_ in range(n-1):
+                        for j_ in range(0, n-i_-1):
+                            course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccpg.tie_settle_pg(
+                                course_tmp_pref[j_], course_tmp_pref[j_+1])
+                for ctp in course_tmp_pref:
+                    if ccpg.get_requirement() > 0 and ctp.pg_sem == 1:
+                        ccpg.assign_faculty(ctp.smail)
+                        ctp.allot_course_pg(ccpg)
+                        print(ccpg.course_name, ctp.smail)
 
     def compute_provisional_allotment_ug(self):
         # provides the course taught history from other files
@@ -278,11 +297,18 @@ class allotment:
         print(cpd)
         assert NUM_PREFERENCES + \
             2 == len(cpd), "Preference Mismatch between file and definition"
-        for i in range(3, len(cpd)):
-            pref_c_to_f = list(course_pref_data[cpd[i]])
+        ug_start_col = 3
+        pg_start_col = ug_start_col + NUM_PREFERENCES
+        for i in range(0, NUM_PREFERENCES):
+            pref_c_to_f = list(course_pref_data[cpd[ug_start_col + i]])
             for k in range(0, len(tmp_fac_roll)):
                 self.course_list_master_data[pref_c_to_f[k]
-                                             ].preference[i-3].append(tmp_fac_roll[k])
+                                             ].preference[i].append(tmp_fac_roll[k])
+        for i in range(0, NUM_PREFERENCES):
+            pref_c_to_f = list(course_pref_data[cpd[pg_start_col + i]])
+            for k in range(0, len(tmp_fac_roll)):
+                self.course_list_master_data[pref_c_to_f[k]
+                                             ].preference[i].append(tmp_fac_roll[k])
 
     def update_requirements(self, dat_file):
         faculty_requirement = pd.read_csv(dat_file)
@@ -336,6 +362,10 @@ class allotment:
             for x in course_.faculty_list:
                 output_sheet.append(
                     [course_.course_name + " (" + course_.course_code + ")", self.faculty_list_master_data[x].name])
+        for course_ in self.current_course_pg:
+            for x in course_.faculty_list:
+                output_sheet.append(
+                    [course_.course_name + " (" + course_.course_code + ")", self.faculty_list_master_data[x].name])
         output_sheet.sort(key=lambda x: x[0])
         # df_cf.columns = ['Course code', 'Course name', 'Faculty']
         df_cf = pd.DataFrame(output_sheet, columns=[
@@ -376,3 +406,5 @@ class allotment:
             f.write(html_string.format(table=df_cf.to_html(classes='mystyle')))
         pdfkit.from_file('allotment_2.html', 'output_file_2.pdf',
                          options={"enable-local-file-access": ""})
+        
+        

@@ -61,7 +61,10 @@ with st.form("UG allotment"):
        odd2023.extract_preferences(file2)
        odd2023.compute_provisional_allotment_ug()
        df_allot = odd2023.generate_allotment()
+       course_pending = odd2023.get_course_pending()
+       df_cp = pd.DataFrame(course_pending, columns=['Course code', 'Course Name', 'Required Faculty'])
        st.dataframe(df_allot)
+       st.dataframe(df_cp)
        odd2023.get_tab_course_fac()
        is_ug_done = True
 
@@ -76,7 +79,11 @@ with st.form("PG allotment"):
        odd2023.compute_provisional_allotment_ug()
        odd2023.compute_provisional_allotment_pg()
        df_allot = odd2023.generate_allotment()
+       course_pending = odd2023.get_course_pending()
+       df_cp = pd.DataFrame(course_pending, columns=[
+                            'Course code', 'Course Name', 'Required Faculty'])
        st.dataframe(df_allot)
+       st.dataframe(df_cp)
        odd2023.get_tab_course_fac()
        is_ug_done = True
 

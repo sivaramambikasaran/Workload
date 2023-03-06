@@ -1,5 +1,6 @@
 import pandas as pd
 import pdfkit
+import random
 
 UG_COURSE_LIMIT = 3
 # 4 semesters  constitute a cycle
@@ -224,25 +225,51 @@ class allotment:
         # File name needs to taken as input
         df.to_csv('work_load_ODD_2023.csv')
         return df
+
+    def get_course_pending(self):
+        courses_pending = []
+        # UG courses for which requirement not met
+        for ccug in self.current_course_ug:
+            if ccug.get_requirement() > 0:
+                courses_pending.append(
+                    [ccug.course_code, ccug.course_name, ccug.get_requirement()])
+        # PG courses for which requirement not met
+        for ccpg in self.current_course_pg:
+            if ccpg.get_requirement() > 0:
+                courses_pending.append(
+                    [ccpg.course_code, ccpg.course_name, ccpg.get_requirement()])
+        return courses_pending
+
+
+    def get_faculty_pending(self):
+        faculty_pending = []
+        # UG courses for which requirement not met
+        for fac in self.faculty_on_roll:
+            if fac.can_accommodate_ug():
+                faculty_pending.append([fac.smail, fac.name, 'UG'])
+            if fac.can_accommodate_pg():
+                faculty_pending.append([fac.smail, fac.name, 'PG'])
+        return faculty_pending
+    
 # self.current_course_pg holds current pg courses
     def compute_provisional_allotment_pg(self):
         for i in range(0, NUM_PREFERENCES-1):
             for ccpg in self.current_course_pg:
                 if ccpg.get_requirement() > 0:
                     course_tmp_pref = []
-                for x in ccpg.preference[i]:
-                    if (self.faculty_list_master_data[x].can_accommodate_pg()):
-                        course_tmp_pref.append(
-                            self.faculty_list_master_data[x])
-                for i_ in range(n-1):
-                        for j_ in range(0, n-i_-1):
-                            course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccpg.tie_settle_pg(
-                                course_tmp_pref[j_], course_tmp_pref[j_+1])
-                for ctp in course_tmp_pref:
-                    if ccpg.get_requirement() > 0 and ctp.pg_sem == 1:
-                        ccpg.assign_faculty(ctp.smail)
-                        ctp.allot_course_pg(ccpg)
-                        print(ccpg.course_name, ctp.smail)
+                    for x in ccpg.preference[i]:
+                        if (self.faculty_list_master_data[x].can_accommodate_pg()):
+                            course_tmp_pref.append(
+                                self.faculty_list_master_data[x])
+                    for i_ in range(n-1):
+                            for j_ in range(0, n-i_-1):
+                                course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccpg.tie_settle_pg(
+                                    course_tmp_pref[j_], course_tmp_pref[j_+1])
+                    for ctp in course_tmp_pref:
+                        if ccpg.get_requirement() > 0 and ctp.pg_sem == 1:
+                            ccpg.assign_faculty(ctp.smail)
+                            ctp.allot_course_pg(ccpg)
+                            print(ccpg.course_name, ctp.smail)
 
     def compute_provisional_allotment_ug(self):
         # provides the course taught history from other files
@@ -407,4 +434,51 @@ class allotment:
         pdfkit.from_file('allotment_2.html', 'output_file_2.pdf',
                          options={"enable-local-file-access": ""})
         
+        
+class test_case_generator:
+    def __init__(self) -> None:
+        # Database of courses and faculty
+        self.faculty_list_master_data = {}
+        flmd = pd.read_csv('./data/facultyList.csv')
+        tmp_fac_name = flmd['Faculty Name']
+        tmp_fac_mail = flmd['Mail id']
+        for i in range(len(tmp_fac_mail)):
+            self.faculty_list_master_data.update(
+                {tmp_fac_mail[i]: faculty([tmp_fac_name[i], tmp_fac_mail[i]])})
+        self.course_list_master_data = {}
+        clmd = pd.read_csv('./data/courseList.csv')
+        clmd = clmd.drop_duplicates(keep='first')
+        clmd['Course Name'] = clmd['Course Name'].apply(str.lower)
+        clmd['Course Name'] = clmd['Course Name'].apply(str.capitalize)
+        # clmd.to_csv('courseList.csv', index=False)
+        # Now the course list has unique courses and the course name is uniform
+        tmp_course_list1 = list(clmd['Course code'])
+        tmp_course_list2 = list(clmd['Course Name'])
+        tmp_course_list3 = list(clmd['Course Type'])
+        for i in range(0, len(tmp_course_list1)):
+            self.course_list_master_data.update(
+                {tmp_course_list1[i]: course(tmp_course_list1[i], tmp_course_list2[i])})
+            if tmp_course_list3[i] != 'UG':
+                self.course_list_master_data[tmp_course_list1[i]].set_as_pg()
+        self.current_course_ug = set()
+        self.current_course_pg = set()
+
+    def generate_test_preferences(self):
+        item = [random.sample(list(self.current_course_ug), k=NUM_PREFERENCES), random.sample(list(self.current_course_pg), k=NUM_PREFERENCES)]
+        return item
+    
+    def update_requirements(self, dat_file):
+        faculty_requirement = pd.read_csv(dat_file)
+        course_list_ = list(faculty_requirement['Course'])
+        # TODO : update current_course_ug/pg based on requirement
+        course_req_ = list(faculty_requirement[' Requirement'])
+        if len(self.current_course_pg) + len(self.current_course_pg) == 0:
+            for i in range(len(course_list_)):
+                if self.course_list_master_data[course_list_[i]].isUG_course():
+                    self.current_course_ug.add(course_list_[i])
+                else:
+                    self.current_course_pg.add(course_list_[i])
+    
+    def generate_test_data(self):
+        pass
         

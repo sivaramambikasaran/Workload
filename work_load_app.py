@@ -26,13 +26,13 @@ test_case_fac = wl.test_case_generator()
 
 st.subheader('Random Preference Generator')
 with st.form("Random Preference Generator"):
+    st.write("Click 'Generate' button to get a random preference sheet")
     submitted = st.form_submit_button("Generate")
     if submitted:
         test_case_fac.update_requirements(file1)
         df_test = test_case_fac.generate_test_data()
         st.write(df_test)
-        
-st.write("To download the above table in csv format")
+
 st.write("click below to download in csv format")
 st.download_button(
     ".csv",
@@ -42,6 +42,7 @@ st.download_button(
     key='download-test-csv'
 )
 
+st.subheader('Process Data')
 with st.form("Process data"):
    # Every form must have a submit button.
    submitted = st.form_submit_button("Process requirements and preferences")
@@ -54,9 +55,6 @@ with st.form("Process data"):
        df_pref.replace(str(np.nan), " ")
 
 st.write(df_pref)
-
-
-
 
 
 csv_pref = convert_df(df_pref)
@@ -83,6 +81,7 @@ with st.form("UG allotment"):
        odd2023.compute_provisional_allotment_ug()
        df_allot = odd2023.generate_allotment()
        course_pending = odd2023.get_course_pending()
+       st.subheader("Required faculty for following courses")
        df_cp = pd.DataFrame(course_pending, columns=['Course code', 'Course Name', 'Required Faculty'])
        st.dataframe(df_allot)
        st.dataframe(df_cp)

@@ -6,6 +6,9 @@ import workLoad as wl
 from pathlib import Path
 
 
+def convert_df(df_):
+   return df_.to_csv(index=False).encode('utf-8')
+
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
 st.subheader('Data dependencies')
@@ -16,13 +19,32 @@ file2 = st.file_uploader("Upload Faculty preference sheet")
 odd2023 = wl.allotment()
 df_pref = pd.DataFrame()
 df_allot = pd.DataFrame()
+df_test = pd.DataFrame()
 odd2023.set_faculty()
 odd2023.set_courses()
+test_case_fac = wl.test_case_generator()
 
+st.subheader('Random Preference Generator')
+with st.form("Random Preference Generator"):
+    submitted = st.form_submit_button("Generate")
+    if submitted:
+        test_case_fac.update_requirements(file1)
+        df_test = test_case_fac.generate_test_data()
+        st.write(df_test)
+        
+st.write("To download the above table in csv format")
+st.write("click below to download in csv format")
+st.download_button(
+    ".csv",
+    convert_df(df_test),
+    "Teaching_Preference.csv",
+    "text/csv",
+    key='download-test-csv'
+)
 
 with st.form("Process data"):
    # Every form must have a submit button.
-   submitted = st.form_submit_button("Process")
+   submitted = st.form_submit_button("Process requirements and preferences")
    if submitted:
        odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
        odd2023.extract_preferences(file2)
@@ -34,8 +56,7 @@ with st.form("Process data"):
 st.write(df_pref)
 
 
-def convert_df(df_):
-   return df_.to_csv(index=False).encode('utf-8')
+
 
 
 csv_pref = convert_df(df_pref)

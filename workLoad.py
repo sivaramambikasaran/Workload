@@ -439,9 +439,11 @@ class test_case_generator:
     def __init__(self) -> None:
         # Database of courses and faculty
         self.faculty_list_master_data = {}
+        self.faculty_list = []
         flmd = pd.read_csv('./data/facultyList.csv')
         tmp_fac_name = flmd['Faculty Name']
         tmp_fac_mail = flmd['Mail id']
+        self.faculty_list = tmp_fac_mail
         for i in range(len(tmp_fac_mail)):
             self.faculty_list_master_data.update(
                 {tmp_fac_mail[i]: faculty([tmp_fac_name[i], tmp_fac_mail[i]])})
@@ -462,10 +464,6 @@ class test_case_generator:
                 self.course_list_master_data[tmp_course_list1[i]].set_as_pg()
         self.current_course_ug = set()
         self.current_course_pg = set()
-
-    def generate_test_preferences(self):
-        item = [random.sample(list(self.current_course_ug), k=NUM_PREFERENCES), random.sample(list(self.current_course_pg), k=NUM_PREFERENCES)]
-        return item
     
     def update_requirements(self, dat_file):
         faculty_requirement = pd.read_csv(dat_file)
@@ -480,5 +478,20 @@ class test_case_generator:
                     self.current_course_pg.add(course_list_[i])
     
     def generate_test_data(self):
-        pass
+        count = 0
+        output_sheet = []
+        for fac in self.faculty_list:
+            count += 1
+            pref1 = random.sample(list(self.current_course_ug), k=3) 
+            pref2 = random.sample(list(self.current_course_pg), k=3)
+            row = [count, fac]
+            for pref_ in pref1:
+                row.append(pref_)
+            for pref_ in pref2:
+                row.append(pref_)
+            output_sheet.append(row)
+        df = pd.DataFrame(output_sheet)
+        # File name needs to taken as input
+        df.to_csv('Teaching_Preference.csv')
+        return df
         

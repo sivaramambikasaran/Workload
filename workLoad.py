@@ -5,7 +5,7 @@ import random
 UG_COURSE_LIMIT = 3
 # 4 semesters  constitute a cycle
 COURSE_PER_CYCLE = 6
-NUM_PREFERENCES = 4
+NUM_PREFERENCES = 3
 NUM_TIE_RULES = 3
 YEAR_ = 2023
 SEM_ = 'ODD'
@@ -322,8 +322,6 @@ class allotment:
         # iterating the columns
         cpd = list(course_pref_data.columns)
         print(cpd)
-        assert NUM_PREFERENCES + \
-            2 == len(cpd), "Preference Mismatch between file and definition"
         ug_start_col = 3
         pg_start_col = ug_start_col + NUM_PREFERENCES
         for i in range(0, NUM_PREFERENCES):
@@ -484,14 +482,14 @@ class test_case_generator:
             count += 1
             pref1 = random.sample(list(self.current_course_ug), k=3) 
             pref2 = random.sample(list(self.current_course_pg), k=3)
-            row = [count, fac]
+            row = [count, self.faculty_list_master_data[fac].name, fac]
             for pref_ in pref1:
                 row.append(pref_)
             for pref_ in pref2:
                 row.append(pref_)
             output_sheet.append(row)
-        df = pd.DataFrame(output_sheet)
+        df = pd.DataFrame(output_sheet, columns=['Time stamp', 'Faculty Name','Mail id', 'Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5', 'Course 6'])
         # File name needs to taken as input
-        df.to_csv('Teaching_Preference.csv')
+        #df.to_csv('Teaching_Preference.csv')
         return df
         

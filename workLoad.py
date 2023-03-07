@@ -189,6 +189,40 @@ class allotment:
         self.current_course_ug = set()
         self.current_course_pg = set()
 
+    def update_course_history(self):
+        # workload_hist = pd.read_csv('work_load_ODD_2022.csv')
+        # After each year, the courses are allotted, a function is written to store that in a
+        # csv file named as : work_load_ODD/EVEN_YYYY.csv
+        # As of now, just a single year data is considered
+        # Keep the vectors ug_count_ and pg_count_ equivalent to faculty_on_roll
+        # For each course add course_history{} dict
+        # iterate through each sheet and add to each course who taught if key is there then add value if not add key and 1
+        workload_history_file = ['work_load_ODD_21.csv',
+                                'work_load_EVEN_21.csv', 'work_load_ODD_22.csv', 'work_load_EVEN_22.csv']
+        for i_ in range(0, len(workload_history_file)):
+            workload_hist = pd.read_csv(workload_history_file[i_])
+            # faculty_list_master_data[].hist_ug
+            for i in range(0, len(workload_hist.index)):
+                course_fac_list = list(workload_hist.iloc[i])
+                course_code_ = course_fac_list[0]
+                course_fac_list.remove(course_code_)
+                course_fac_list = [x for x in course_fac_list if x == x]
+                for cfl in course_fac_list:
+                    # this is to update faculty object
+                    if self.course_list_master_data[course_code_].isUG_course():
+                        self.faculty_list_master_data[cfl].hist_ug()
+                    else:
+                        self.faculty_list_master_data[cfl].hist_pg()
+                    # this is done to update the course objects
+                    if self.course_list_master_data[course_code_].course_history.get(cfl) == None:
+                        tmp = 1
+                        self.course_list_master_data[course_code_].course_history.update({
+                                                                                    cfl: tmp})
+                    else:
+                        tmp = self.course_list_master_data[course_code_].course_history[cfl] + 1
+                        self.course_list_master_data[course_code_].course_history.update({
+                                                                                cfl: tmp})
+
     def show_course_fac_preference_table(self):
         # As of now, the preference for each course printed in the order of filling the preference form
         print(f"Faculty count ", len(self.current_course_ug))

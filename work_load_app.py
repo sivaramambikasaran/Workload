@@ -11,10 +11,7 @@ def convert_df(df_):
 
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
-st.subheader('Data dependencies')
-st.write("Please upload the following files in .csv format")
-file1 = st.file_uploader("Upload Course Faculty requirement")
-file2 = st.file_uploader("Upload Faculty preference sheet")
+
 
 odd2023 = wl.allotment()
 df_pref = pd.DataFrame()
@@ -25,6 +22,8 @@ odd2023.set_courses()
 test_case_fac = wl.test_case_generator()
 
 st.subheader('Random Preference Generator')
+st.write("Please upload the Course-Faculty requirement as a csv file")
+file1 = st.file_uploader("Upload Course Faculty requirement for preference generator")
 with st.form("Random Preference Generator"):
     st.write("Click 'Generate' button to get a random preference sheet")
     submitted = st.form_submit_button("Generate")
@@ -41,6 +40,10 @@ st.download_button(
     "text/csv",
     key='download-test-csv'
 )
+st.subheader('Data dependencies')
+st.write("Please upload the following files in .csv format")
+file1 = st.file_uploader("Upload Course Faculty requirement")
+file2 = st.file_uploader("Upload Faculty preference sheet")
 
 st.subheader('Process Data')
 with st.form("Process data"):

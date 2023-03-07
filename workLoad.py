@@ -194,7 +194,7 @@ class allotment:
         print(f"Faculty count ", len(self.current_course_ug))
         output_sheet = []
         for course_ in self.current_course_ug:
-            for i in range(0, NUM_PREFERENCES-1):
+            for i in range(0, NUM_PREFERENCES):
                 tmp = []
                 tmp.append(course_.course_code)
                 tmp.append("Option " + str(i+1))
@@ -253,7 +253,7 @@ class allotment:
     
 # self.current_course_pg holds current pg courses
     def compute_provisional_allotment_pg(self):
-        for i in range(0, NUM_PREFERENCES-1):
+        for i in range(0, NUM_PREFERENCES):
             for ccpg in self.current_course_pg:
                 if ccpg.get_requirement() > 0:
                     course_tmp_pref = []
@@ -261,6 +261,7 @@ class allotment:
                         if (self.faculty_list_master_data[x].can_accommodate_pg()):
                             course_tmp_pref.append(
                                 self.faculty_list_master_data[x])
+                    n = len(course_tmp_pref)
                     for i_ in range(n-1):
                             for j_ in range(0, n-i_-1):
                                 course_tmp_pref[j_], course_tmp_pref[j_ + 1] = ccpg.tie_settle_pg(
@@ -278,7 +279,7 @@ class allotment:
         # extract_preferences()
         # Allotment algorithm
         # Allotment does in Number of preferences
-        for i in range(0, NUM_PREFERENCES-1):
+        for i in range(0, NUM_PREFERENCES):
             # Does for each current courses
             for ccug in self.current_course_ug:
                 # order the faculty

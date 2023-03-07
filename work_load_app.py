@@ -12,7 +12,6 @@ def convert_df(df_):
 st.title('Work Load Manager')
 st.write("Department of Mathematics, IIT Madras")
 
-
 odd2023 = wl.allotment()
 df_pref = pd.DataFrame()
 df_allot = pd.DataFrame()
@@ -21,25 +20,6 @@ odd2023.set_faculty()
 odd2023.set_courses()
 test_case_fac = wl.test_case_generator()
 
-st.subheader('Random Preference Generator')
-st.write("Please upload the Course-Faculty requirement as a csv file")
-file1 = st.file_uploader("Upload Course Faculty requirement for preference generator")
-with st.form("Random Preference Generator"):
-    st.write("Click 'Generate' button to get a random preference sheet")
-    submitted = st.form_submit_button("Generate")
-    if submitted:
-        test_case_fac.update_requirements(file1)
-        df_test = test_case_fac.generate_test_data()
-        st.write(df_test)
-
-st.write("click below to download in csv format")
-st.download_button(
-    ".csv",
-    convert_df(df_test),
-    "Teaching_Preference.csv",
-    "text/csv",
-    key='download-test-csv'
-)
 st.subheader('Data dependencies')
 st.write("Please upload the following files in .csv format")
 file1 = st.file_uploader("Upload Course Faculty requirement")
@@ -130,3 +110,23 @@ if my_file2.is_file():
                        file_name="WorkLoad.pdf",
                        mime='application/octet-stream')
 
+
+st.subheader('Random Preference Generator')
+st.write("Please upload the Course-Faculty requirement as a csv file")
+file1 = st.file_uploader("Upload Course Faculty requirement for preference generator")
+with st.form("Random Preference Generator"):
+    st.write("Click 'Generate' button to get a random preference sheet")
+    submitted = st.form_submit_button("Generate")
+    if submitted:
+        test_case_fac.update_requirements(file1)
+        df_test = test_case_fac.generate_test_data()
+        st.write(df_test)
+
+st.write("click below to download in csv format")
+st.download_button(
+    ".csv",
+    convert_df(df_test),
+    "Teaching_Preference.csv",
+    "text/csv",
+    key='download-test-csv'
+)

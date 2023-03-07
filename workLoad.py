@@ -309,6 +309,7 @@ class allotment:
         # Course preference form
         self.faculty_on_roll = set()
         course_pref_data = pd.read_csv(dat_file)
+        course_pref_data.fillna('NA', inplace=True)
         # Safe to sort the file
         course_pref_data = course_pref_data.sort_values(by=['Time stamp'])
         # Get the faculty on roll
@@ -328,13 +329,13 @@ class allotment:
         for i in range(0, NUM_PREFERENCES):
             pref_c_to_f = list(course_pref_data[cpd[ug_start_col + i]])
             for k in range(0, len(tmp_fac_roll)):
-                self.course_list_master_data[pref_c_to_f[k]
-                                             ].preference[i].append(tmp_fac_roll[k])
+                if pref_c_to_f[k] != 'NA':
+                    self.course_list_master_data[pref_c_to_f[k]].preference[i].append(tmp_fac_roll[k])
         for i in range(0, NUM_PREFERENCES):
             pref_c_to_f = list(course_pref_data[cpd[pg_start_col + i]])
             for k in range(0, len(tmp_fac_roll)):
-                self.course_list_master_data[pref_c_to_f[k]
-                                             ].preference[i].append(tmp_fac_roll[k])
+                if pref_c_to_f[k] != 'NA':
+                    self.course_list_master_data[pref_c_to_f[k]].preference[i].append(tmp_fac_roll[k])
 
     def update_requirements(self, dat_file):
         faculty_requirement = pd.read_csv(dat_file)

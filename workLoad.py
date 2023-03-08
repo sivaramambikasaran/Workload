@@ -122,8 +122,8 @@ class course:
         return self.course_faculty_required
 
     def tie_rule_1(self, fac1, fac2):
-        if fac1.ug_course_count_left < fac2.ug_course_count_left:
-            return None
+        # if fac1.ug_course_count_left < fac2.ug_course_count_left:
+        #     return None
         # Number of UG courses left in cycle (NOTICE the reverse order)
         if fac1.ug_course_count_left < fac2.ug_course_count_left:
             return fac2, fac1
@@ -157,13 +157,27 @@ class course:
     # The below tie is used along with bubble sort to sort and allot
     # Add ties as and when needed
 
+    # UG Tie settle for those who filled the form last
+    def priority_tie_ug(self, fac1, fac2):
+        if fac1.priority_key > fac2.priority_key:
+            return fac1, fac2
+        else:
+            return fac2, fac1
+
+    # PG Tie settle for those who filled the form first 
+    def priority_tie_pg(self, fac1, fac2):
+        if fac1.priority_key < fac2.priority_key:
+            return fac1, fac2
+        else:
+            return fac2, fac1
+    # Hierarchy of ties for UG course   
     def tie_settle_ug(self, fac1, fac2):
 
         if self.tie_rule_1(fac1, fac2) != None:
             return self.tie_rule_1(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
-        return self.tie_rule_3(fac1, fac2)
+        return self.priority_tie_ug(fac1, fac2)
         # if fac1.tie_rule_X(fac2) != None:
         #  return fac1.tie_rule_x(fac2)   ====> can be added at the bottom to add more Ties (for an xth tie)
 
@@ -171,8 +185,7 @@ class course:
     def tie_settle_pg(self, fac1, fac2):
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
-        if self.tie_rule_3(fac1, fac2) != None:
-            return self.tie_rule_3(fac1, fac2)
+        return self.priority_tie_pg(fac1, fac2)
         # if fac1.tie_rule_X(fac2) != None:
         #  return fac1.tie_rule_x(fac2)   ====> can be added at the bottom to add more Ties (for an xth tie)
 

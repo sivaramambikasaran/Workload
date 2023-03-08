@@ -1,6 +1,7 @@
 import pandas as pd
 import pdfkit
 import random
+import os
 
 UG_COURSE_LIMIT = 3
 # 4 semesters  constitute a cycle
@@ -210,9 +211,20 @@ class allotment:
         # Keep the vectors ug_count_ and pg_count_ equivalent to faculty_on_roll
         # For each course add course_history{} dict
         # iterate through each sheet and add to each course who taught if key is there then add value if not add key and 1
-        workload_history_file = ['work_load_ODD_21.csv',
-                                'work_load_EVEN_21.csv', 'work_load_ODD_22.csv', 'work_load_EVEN_22.csv']
-        for i_ in range(0, len(workload_history_file)):
+        data_path = "./data/"
+        # to store files in a list
+        workload_history_file = []
+
+        # dirs=directories
+        for (root, dirs, file) in os.walk(data_path):
+            for f in file:
+                if 'workload' in f:
+                    workload_history_file.append(data_path + f)
+        # Consider only the latest 3 workload files
+        workload_history_file = sorted(workload_history_file)[-3:]
+        # workload_history_file = ['work_load_ODD_21.csv',
+        #                         'work_load_EVEN_21.csv', 'work_load_ODD_22.csv', 'work_load_EVEN_22.csv']
+        for i_ in range(0, 3):
             workload_hist = pd.read_csv(workload_history_file[i_])
             # faculty_list_master_data[].hist_ug
             for i in range(0, len(workload_hist.index)):
@@ -292,10 +304,13 @@ class allotment:
         faculty_pending = []
         # UG courses for which requirement not met
         for fac in self.faculty_on_roll:
-            if fac.can_accommodate_ug():
-                faculty_pending.append([fac.smail, fac.name, 'UG'])
-            if fac.can_accommodate_pg():
-                faculty_pending.append([fac.smail, fac.name, 'PG'])
+            tmp_fact = self.faculty_list_master_data[fac]
+            if tmp_fact.can_accommodate_ug():
+                faculty_pending.append(
+                    [tmp_fact.smail, tmp_fact.name, 'UG', tmp_fact.ug_course_count_left])
+            if tmp_fact.can_accommodate_pg():
+                faculty_pending.append(
+                    [tmp_fact.smail, tmp_fact.name, 'PG', tmp_fact.pg_course_count_left])
         return faculty_pending
     
 # self.current_course_pg holds current pg courses

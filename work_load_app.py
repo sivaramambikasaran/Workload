@@ -61,6 +61,7 @@ with st.form("UG allotment"):
    if submitted:
        odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
        odd2023.extract_preferences(file2)
+       odd2023.update_course_history()
        odd2023.compute_provisional_allotment_ug()
        df_allot = odd2023.generate_allotment()
        course_pending = odd2023.get_course_pending()
@@ -68,6 +69,9 @@ with st.form("UG allotment"):
        df_cp = pd.DataFrame(course_pending, columns=['Course code', 'Course Name', 'Required Faculty'])
        st.dataframe(df_allot)
        st.dataframe(df_cp)
+       st.subheader("Faculty Courses pending")
+       df_faculty = pd.DataFrame(odd2023.get_faculty_pending(), columns=['Faculty mail','Faculty','Course','Courses Left'])
+       st.dataframe(df_faculty)
        odd2023.get_tab_course_fac()
        is_ug_done = True
 
@@ -79,6 +83,7 @@ with st.form("PG allotment"):
    if submitted:
        odd2023.update_requirements(file1)  # 'facultyRequirement_ug.csv'
        odd2023.extract_preferences(file2)
+       odd2023.update_course_history()
        odd2023.compute_provisional_allotment_ug()
        odd2023.compute_provisional_allotment_pg()
        df_allot = odd2023.generate_allotment()
@@ -87,6 +92,10 @@ with st.form("PG allotment"):
                             'Course code', 'Course Name', 'Required Faculty'])
        st.dataframe(df_allot)
        st.dataframe(df_cp)
+       st.subheader("Faculty Courses pending")
+       df_faculty = pd.DataFrame(odd2023.get_faculty_pending(), columns=[
+                                 'Faculty mail', 'Faculty', 'Course', 'Courses Left'])
+       st.dataframe(df_faculty)
        odd2023.get_tab_course_fac()
        is_ug_done = True
 

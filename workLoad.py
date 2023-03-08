@@ -37,13 +37,6 @@ class faculty:
     def set_priority(self, id):
         self.priority_key = id
 
-    def work_load_history(self, ug_count, pg_count):
-        # data[3] - UG courses taught in previous cycle data data[4] PG courses taught in a cycle
-        self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
-        self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
-        self.course_count = pg_count + ug_count
-        # This will have courses of 4 semesters initially, post allotment this increases on provisional allotment
-
     def can_accommodate_ug(self):
         if self.course_count < COURSE_PER_CYCLE and self.ug_course_count_left > 0 and self.ug_sem == 1:
             return True
@@ -55,27 +48,23 @@ class faculty:
         return True
 
     def hist_ug(self):
-        #       self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
-        #       self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
-        #       self.course_count = pg_count + ug_count
         self.ug_course_count_left -= 1
         self.pg_course_count_left -= 1
         self.course_count += 1
 
     def hist_pg(self):
-        #       self.ug_course_count_left = UG_COURSE_LIMIT - ug_count
-        #       self.pg_course_count_left = COURSE_PER_CYCLE - (pg_count + ug_count)
-        #       self.course_count = pg_count + ug_count
         self.pg_course_count_left -= 1
         self.course_count += 1
 
     def allot_course_ug(self, course_):
         self.current_allotment.append(course_)
         self.ug_sem = 0
+        self.hist_ug()
 
     def allot_course_pg(self, course_):
         self.current_allotment.append(course_)
         self.pg_sem = 0
+        self.hist_pg()
 
     def print_faculty_details(self):
         print(self.name)
@@ -230,8 +219,9 @@ class allotment:
             for i in range(0, len(workload_hist.index)):
                 course_fac_list = list(workload_hist.iloc[i])
                 course_code_ = course_fac_list[0]
+                print(course_code_)
                 course_fac_list.remove(course_code_)
-                course_fac_list = [x for x in course_fac_list if x == x]
+                course_fac_list = [x for x in course_fac_list if x == x] # Removes the empty items
                 for cfl in course_fac_list:
                     # this is to update faculty object
                     if self.course_list_master_data[course_code_].isUG_course():

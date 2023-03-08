@@ -307,10 +307,10 @@ class allotment:
             tmp_fact = self.faculty_list_master_data[fac]
             if tmp_fact.can_accommodate_ug():
                 faculty_pending.append(
-                    [tmp_fact.smail, tmp_fact.name, 'UG', tmp_fact.ug_course_count_left])
+                    [tmp_fact.smail, tmp_fact.name, 'UG Courses left', tmp_fact.ug_course_count_left])
             if tmp_fact.can_accommodate_pg():
                 faculty_pending.append(
-                    [tmp_fact.smail, tmp_fact.name, 'PG', tmp_fact.pg_course_count_left])
+                    [tmp_fact.smail, tmp_fact.name, 'Total Courses left', tmp_fact.pg_course_count_left])
         return faculty_pending
     
 # self.current_course_pg holds current pg courses

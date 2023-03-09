@@ -250,6 +250,14 @@ class allotment:
                 for x in course_.preference[i]:
                     tmp.append(x)
                 output_sheet.append(tmp)
+        for course_ in self.current_course_pg:
+            for i in range(0, NUM_PREFERENCES):
+                tmp = []
+                tmp.append(course_.course_code)
+                tmp.append("Option " + str(i+1))
+                for x in course_.preference[i]:
+                    tmp.append(x)
+                output_sheet.append(tmp)
         # df = pd.DataFrame(output_sheet)
         return output_sheet
 

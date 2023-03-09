@@ -139,3 +139,16 @@ st.download_button(
     "text/csv",
     key='download-test-csv'
 )
+
+# Following are the test cases
+#   1) Number of course requirement not met (T1)
+#   2) Number of faculty pref in ug not match (T1,T2)
+#   3) Number of faculty pref in pg not match (T1,T3)
+#   4) Only UG courses (T2)
+#   5) Only PG courses (T3)
+#   6) Tie for UG works(T1,T2)
+#   7) Tie for PG works  (T1,T3)
+# Test Case description
+#   T1 -> UG course requirement not met
+#   T2 -> Only UG courses, under requirement 
+#   T3 -> Only PG courses, under requirement, varying preferences

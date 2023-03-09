@@ -115,12 +115,24 @@ class course:
         # if fac1.ug_course_count_left < fac2.ug_course_count_left:
         #     return None
         # Number of UG courses left in cycle (NOTICE the reverse order)
+        if fac1.pg_course_count_left < fac2.pg_course_count_left:
+            return fac2, fac1
+        if fac1.pg_course_count_left > fac2.pg_course_count_left:
+            return fac1, fac2
+        return None
+
+
+
+    def tie_rule_ug(self, fac1, fac2):
+        # if fac1.ug_course_count_left < fac2.ug_course_count_left:
+        #     return None
+        # Number of UG courses left in cycle (NOTICE the reverse order)
         if fac1.ug_course_count_left < fac2.ug_course_count_left:
             return fac2, fac1
         if fac1.ug_course_count_left > fac2.ug_course_count_left:
             return fac1, fac2
         return None
-
+        
     def tie_rule_2(self, fac1, fac2):
         a = 0
         b = 0
@@ -165,6 +177,8 @@ class course:
 
         if self.tie_rule_1(fac1, fac2) != None:
             return self.tie_rule_1(fac1, fac2)
+        if self.tie_rule_ug(fac1, fac2) !=None:
+            return self.tie_rule_ug(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
         return self.priority_tie_ug(fac1, fac2)
@@ -173,6 +187,8 @@ class course:
 
     # for PG only two ties are needed
     def tie_settle_pg(self, fac1, fac2):
+        if self.tie_rule_1(fac1, fac2) != None:
+            return self.tie_rule_1(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
         return self.priority_tie_pg(fac1, fac2)

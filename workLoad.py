@@ -23,6 +23,9 @@ class faculty:
         self.smail = data[1]
         self.ug_course_count_left = UG_COURSE_LIMIT
         self.pg_course_count_left = COURSE_PER_CYCLE
+        # Initially a faculty is assumed he can accommodate 3 courses 
+        # This will be decremented for the previous cycle courses
+        self.max_current_sem_courses = 3
         # This will hold the courses alloted  (filled either through provisional allotment)
         self.current_allotment = []
         self.ug_sem = 1
@@ -132,7 +135,15 @@ class course:
         if fac1.ug_course_count_left > fac2.ug_course_count_left:
             return fac1, fac2
         return None
-        
+            
+    def tie_rule_alternate(self, fac1, fac2):
+        # Faculty with 2 courses to teach this semester is given better tie
+        if fac1.max_current_sem_courses < fac2.max_current_sem_courses:
+            return fac2, fac1
+        if fac1.max_current_sem_courses > fac2.max_current_sem_courses:
+            return fac1, fac2
+        return None
+
     def tie_rule_2(self, fac1, fac2):
         a = 0
         b = 0
@@ -174,11 +185,12 @@ class course:
             return fac2, fac1
     # Hierarchy of ties for UG course   
     def tie_settle_ug(self, fac1, fac2):
-
         if self.tie_rule_1(fac1, fac2) != None:
             return self.tie_rule_1(fac1, fac2)
         if self.tie_rule_ug(fac1, fac2) !=None:
             return self.tie_rule_ug(fac1, fac2)
+        if self.tie_rule_alternate(fac1, fac2) != None:
+            return self.tie_rule_alternate(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
         return self.priority_tie_ug(fac1, fac2)
@@ -189,6 +201,8 @@ class course:
     def tie_settle_pg(self, fac1, fac2):
         if self.tie_rule_1(fac1, fac2) != None:
             return self.tie_rule_1(fac1, fac2)
+        if self.tie_rule_alternate(fac1, fac2) != None:
+            return self.tie_rule_alternate(fac1, fac2)
         if self.tie_rule_2(fac1, fac2) != None:
             return self.tie_rule_2(fac1, fac2)
         return self.priority_tie_pg(fac1, fac2)
@@ -244,6 +258,10 @@ class allotment:
                         self.faculty_list_master_data[cfl].hist_ug()
                     else:
                         self.faculty_list_master_data[cfl].hist_pg()
+                    # for only the previous semester courses 
+                    # Assumption that history files with largest number will be be the previous one
+                    if i == 2:
+                        self.faculty_list_master_data[cfl].max_current_sem_courses -= 1
                     # this is done to update the course objects
                     if self.course_list_master_data[course_code_].course_history.get(cfl) == None:
                         tmp = 1
@@ -329,6 +347,10 @@ class allotment:
     
 # self.current_course_pg holds current pg courses
     def compute_provisional_allotment_pg(self):
+        for fac in self.faculty_on_roll:
+            tmp_fact = self.faculty_list_master_data[fac]
+            if tmp_fact.can_accommodate_ug() and tmp_fact.max_current_sem_courses == 2 and tmp_fact.pg_course_count_left >=2:
+                tmp_fact.pg_sem = 2
         for i in range(0, NUM_PREFERENCES):
             for ccpg in self.current_course_pg:
                 if ccpg.get_requirement() > 0:
